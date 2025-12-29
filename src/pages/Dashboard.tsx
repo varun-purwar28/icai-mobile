@@ -46,6 +46,7 @@ export default function Dashboard() {
       description: isExpert ? 'View assigned queries' : 'Submit a tax query',
       icon: MessageSquare,
       color: 'bg-blue-500',
+      path: '/forum',
       show: true,
     },
     { 
@@ -53,6 +54,7 @@ export default function Dashboard() {
       description: 'Access tax resources',
       icon: BookOpen,
       color: 'bg-emerald-500',
+      path: '/publications',
       show: true,
     },
     { 
@@ -60,6 +62,7 @@ export default function Dashboard() {
       description: 'Webinars & seminars',
       icon: Calendar,
       color: 'bg-purple-500',
+      path: '/events',
       show: true,
     },
     { 
@@ -67,6 +70,7 @@ export default function Dashboard() {
       description: 'Latest updates',
       icon: Bell,
       color: 'bg-amber-500',
+      path: '/announcements',
       show: true,
     },
     { 
@@ -74,28 +78,8 @@ export default function Dashboard() {
       description: 'Review pending responses',
       icon: Shield,
       color: 'bg-red-500',
+      path: '/forum',
       show: isModerator || isAdmin,
-    },
-    { 
-      title: 'Admin Panel', 
-      description: 'Manage content & users',
-      icon: Settings,
-      color: 'bg-slate-700',
-      show: isAdmin,
-    },
-    { 
-      title: 'Helpdesk', 
-      description: 'Manage support tickets',
-      icon: HelpCircle,
-      color: 'bg-teal-500',
-      show: isHelpdesk || isAdmin,
-    },
-    { 
-      title: 'Analytics', 
-      description: 'View reports & logs',
-      icon: BarChart3,
-      color: 'bg-indigo-500',
-      show: isAdmin,
     },
   ].filter(action => action.show);
 
@@ -183,7 +167,11 @@ export default function Dashboard() {
         <h3 className="text-lg font-display font-semibold mb-4">Quick Actions</h3>
         <div className="grid grid-cols-2 gap-4">
           {quickActions.map((action) => (
-            <Card key={action.title} className="premium-card cursor-pointer">
+            <Card 
+              key={action.title} 
+              className="premium-card cursor-pointer"
+              onClick={() => navigate(action.path)}
+            >
               <CardContent className="p-4">
                 <div className={`w-10 h-10 rounded-lg ${action.color} flex items-center justify-center mb-3`}>
                   <action.icon className="w-5 h-5 text-white" />
