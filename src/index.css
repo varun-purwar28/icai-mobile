@@ -138,14 +138,47 @@
     @apply border-border;
   }
 
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Allow text selection for content, but disable for UI elements */
+  button, a {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* Ensure proper touch targets for mobile */
+  button, a, input, select, textarea {
+    min-height: 44px; /* iOS recommended touch target size */
+  }
+  
+  @media (min-width: 640px) {
+    button, a, input, select, textarea {
+      min-height: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior: none;
+    touch-action: pan-y;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
     @apply font-semibold tracking-tight;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 640px) {
+    body {
+      font-size: 16px; /* Prevent iOS zoom on input focus */
+    }
   }
 }
 
@@ -182,6 +215,13 @@
   /* Glass morphism effect */
   .glass {
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  /* Glass effect for dark backgrounds - better contrast */
+  .glass-dark {
+    @apply bg-primary/90 backdrop-blur-xl border border-accent/20;
+    @apply text-primary-foreground;
+    box-shadow: 0 4px 20px -2px hsl(220 60% 15% / 0.3);
   }
   
   /* Status badges */
